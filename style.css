@@ -1,0 +1,119 @@
+html, body{
+	background-color: #111;
+	text-align: center;
+	font-family: "Helvetica Neue", Helvetica, "sans";
+	margin: 0;
+	padding: 0;
+	color: #ccc;
+	/*overflow-x: hidden; ACTIVATE WHEN DONE */
+}
+
+div{
+	box-sizing: border-box;
+}
+
+header{
+	margin: 0px;
+	min-height: 100vh;
+	position: relative;
+	background-color: #666;
+}
+#titleBar{
+	top: 30%;
+	position: absolute;
+	width: 100%;
+	background-color: rgba(0,0,0, 0.5);
+}
+nav{
+	bottom: 30px;
+	position: absolute;
+	width: 100%;
+	background-color: rgba(0,0,0, 0.5);
+	padding: 10px 0;
+	display: flex;
+	justify-content: center;
+	flex-direction: row;
+	align-items: center;
+}
+nav a{
+	color: #ccc;
+	text-decoration: none;
+	width: 150px;
+}
+a:hover{
+	color: white;
+}
+@media(max-width: 400px){
+	nav{
+		flex-direction: column;
+	}
+}
+
+
+section{
+	min-height: 100vh;
+	max-width: 1000px;
+	margin: 0 auto;
+	padding: 30px;
+	border: 1px white solid;
+}
+
+h2{
+	font-size: 40px;
+	letter-spacing: 3px;
+	font-weight: 100;
+}
+	
+
+.thumbnail{
+	width: 200px;
+	height: 200px;
+	margin: 15px;
+}
+
+#videos{
+	margin: auto;
+}
+
+.video{
+	width: 200px;
+	height: 120px;
+	margin: 10px;
+	display: inline-block;
+	background-color: black;
+}
+
+
+#pascalImg{
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+}
+
+p{
+	max-width: 500px;
+	margin: 0 auto;
+	font-size: 18px;
+}
+@media(max-width: 450px){
+	p{
+		font-size: 16px;
+	}
+}
+
+#gearList{
+	font-size: 15px;
+}
+
+.hidden{
+	display: none;
+}
+
+.email{
+	color: #888;
+}
+.email:hover{
+	color: white;
+	cursor: pointer;
+}
+
