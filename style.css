@@ -1,3 +1,10 @@
+@font-face {
+  font-family: "CodeLight";
+  src: url("fonts/CODE_Light.eot") format("eot"), url("fonts/CODE_Light.woff") format("woff"), url("fonts/CODE_Light.ttf") format("truetype"), url("fonts/CODE_Light.svg#Code-Light") format("svg"); }
+@font-face {
+  font-family: "CodeBold";
+  src: url("fonts/CODE_Bold.eot") format("eot"), url("fonts/CODE_Bold.woff") format("woff"), url("fonts/CODE_Bold.ttf") format("truetype"), url("fonts/CODE_Bold.svg#Code-Light") format("svg"); }
+
 html, body{
 	background-color: #111;
 	text-align: center;
@@ -58,10 +65,35 @@ section{
 	border: 1px white solid;
 }
 
+h1{
+	font-family: "CodeBold";
+	font-size: 50px;
+	letter-spacing: 2px;
+	margin-bottom: 10px;
+}
+
 h2{
+	font-family: "CodeLight";
 	font-size: 40px;
 	letter-spacing: 3px;
-	font-weight: 100;
+	font-weight: 700;
+}
+
+h3{
+	font-family: "CodeLight";
+	font-weight: 700px;
+	margin-top: 10px;
+	font-size: 25px;
+	letter-spacing: 2px;
+}
+
+@media(max-width: 500px){
+	h1{
+		font-size: 30px;
+	}
+	h3{
+		font-size: 20px;
+	}
 }
 	
 
