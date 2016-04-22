@@ -24,19 +24,23 @@ header{
 	margin: 0px;
 	min-height: 100vh;
 	position: relative;
-	background-color: #666;
+	background-image: url("img/bg.jpg");
+	background-position: center center;
+	background-size: cover;
+	background-attachment: fixed;
+	background-repeat: none;
 }
 #titleBar{
 	top: 30%;
 	position: absolute;
 	width: 100%;
-	background-color: rgba(0,0,0, 0.5);
+	background-color: rgba(0,0,0, 0.6);
 }
 nav{
 	bottom: 30px;
 	position: absolute;
 	width: 100%;
-	background-color: rgba(0,0,0, 0.5);
+	background-color: rgba(0,0,0, 0.6);
 	padding: 10px 0;
 	display: flex;
 	justify-content: center;
