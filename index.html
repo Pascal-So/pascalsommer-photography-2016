@@ -11,7 +11,9 @@
 	</title>
 
 	<link rel="stylesheet" type="text/css" href="style.css">
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+	<script type="text/javascript" src="media.js"></script>
 	
 </head>
 <body>
@@ -29,19 +31,24 @@
 
 <section id="work">
 	<h2>WORK</h2>
+	<div id="picview">
+		<div class="picNavButton" id="forwardButton"></div>
+		<div class="picNavButton" id="backwardButton"></div>
+	</div>
+	<div id="preload"></div>
 	<div id="thumbnails">
-		<img src="img/tile01.jpg" class="thumbnail">
-		<img src="img/tile02.jpg" class="thumbnail">
-		<img src="img/tile03.jpg" class="thumbnail">
-		<img src="img/tile04.jpg" class="thumbnail">
-		<img src="img/tile05.jpg" class="thumbnail">
-		<img src="img/tile06.jpg" class="thumbnail">
-		<img src="img/tile07.jpg" class="thumbnail">
-		<img src="img/tile08.jpg" class="thumbnail">
-		<img src="img/tile09.jpg" class="thumbnail">
-		<img src="img/tile10.jpg" class="thumbnail">
-		<img src="img/tile11.jpg" class="thumbnail">
-		<img src="img/tile12.jpg" class="thumbnail">
+		<img src="img/tile01.jpg" class="thumbnail" id = "01">
+		<img src="img/tile02.jpg" class="thumbnail" id = "02">
+		<img src="img/tile03.jpg" class="thumbnail" id = "03">
+		<img src="img/tile04.jpg" class="thumbnail" id = "04">
+		<img src="img/tile05.jpg" class="thumbnail" id = "05">
+		<img src="img/tile06.jpg" class="thumbnail" id = "06">
+		<img src="img/tile07.jpg" class="thumbnail" id = "07">
+		<img src="img/tile08.jpg" class="thumbnail" id = "08">
+		<img src="img/tile09.jpg" class="thumbnail" id = "09">
+		<img src="img/tile10.jpg" class="thumbnail" id = "10">
+		<img src="img/tile11.jpg" class="thumbnail" id = "11">
+		<img src="img/tile12.jpg" class="thumbnail" id = "12">
 	</div>
 	<div id="videos">
 		<div id="video1" class="video"></div>
