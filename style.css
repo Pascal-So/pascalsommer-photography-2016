@@ -111,6 +111,16 @@ h4{
 	}
 }
 
+#picviewContainer{
+	position:relative;
+	margin-bottom: 50px;
+}
+@media(max-width: 500px){
+	#picviewContainer{
+		margin-bottom: 20px;
+	}
+}
+
 #picview{
 	padding-bottom: 50%;
 	background-size: contain;
@@ -118,24 +128,34 @@ h4{
 	background-repeat: no-repeat;
 	position: relative;
 	display: none;
+	-webkit-transition: 0.1s ease-in-out;
+    -moz-transition: 0.1s ease-in-out;
+    -o-transition: 0.1s ease-in-out;
+    transition: 0.1s ease-in-out;
 }
 
 .picNavButton{
 	top: 0;
 	bottom: 0;
 	position: absolute;
+	z-index: 1;
 }
 
 #forwardButton{
 	width: 60%;
 	right: 0;
-
+}
+#forwardButton:hover~#picview{
+	transform: translate(-20px, 0px);
 }
 
 #backwardButton{
 	width: 40%;
 	left: 0;
+}
 
+#backwardButton:hover~#picview{
+	transform: translate(20px, 0px);
 }
 
 
@@ -148,6 +168,10 @@ h4{
 	width: 200px;
 	height: 200px;
 	margin: 15px;
+	-webkit-transition: 0.1s ease-in-out;
+    -moz-transition: 0.1s ease-in-out;
+    -o-transition: 0.1s ease-in-out;
+    transition: 0.1s ease-in-out;
 }
 @media(max-width: 700px){
 	.thumbnail{

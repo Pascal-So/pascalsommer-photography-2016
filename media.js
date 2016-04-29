@@ -8,11 +8,6 @@ function padLeft(number, len){
 	for(var i = 0; i < fill; i++){
 		attach+="0";
 	}
-	console.log();
-	console.log(number);
-	console.log(tmp);
-	console.log(fill);
-	console.log(attach);
 	return attach + tmp;
 }
 
