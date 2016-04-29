@@ -1,13 +1,18 @@
-var currentPic = 0;
+var currentPic = 1;
 var forward = true;
 
 function padLeft(number, len){
 	var tmp = number.toString();
 	var fill = len-tmp.length;
 	var attach = "";
-	for(var i = 0; i < len; i++){
+	for(var i = 0; i < fill; i++){
 		attach+="0";
 	}
+	console.log();
+	console.log(number);
+	console.log(tmp);
+	console.log(fill);
+	console.log(attach);
 	return attach + tmp;
 }
 
@@ -16,11 +21,11 @@ function next(picNumber){
 }
 
 function previous(picNumber){
-	return (picNumber-2)%12 + 1;
+	return (picNumber+10)%12 + 1;
 }
 
 function setPic(picNumber){
-	var pathString = "img/pic" + picNumber + ".jpg";
+	var pathString = "img/pic" + padLeft(picNumber, 2) + ".jpg";
 	$('#picview').css("background-image", "url(" + pathString + ")");
 	if(forward){
 		preloadPic(next(picNumber));
@@ -30,13 +35,16 @@ function setPic(picNumber){
 }
 
 function preloadPic(picNumber){
-	var pathString = "img/pic" + picNumber + ".jpg";
+	var pathString = "img/pic" + padLeft(picNumber, 2) + ".jpg";
 	$('#preload').css("background-image", "url(" + pathString + ")");	
 }
 
 $(function(){
 	$('.thumbnail').click(function(e){
-		setPic(e.target.id);
+		$('#picview').show();
+		forward = true;
+		currentPic = parseInt(e.target.id);
+		setPic(currentPic);
 	});
 
 	$('#forwardButton').click(function(e){

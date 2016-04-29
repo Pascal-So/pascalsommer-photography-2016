@@ -117,6 +117,7 @@ h4{
 	background-position: center center;
 	background-repeat: no-repeat;
 	position: relative;
+	display: none;
 }
 
 .picNavButton{
@@ -128,15 +129,18 @@ h4{
 #forwardButton{
 	width: 60%;
 	right: 0;
+
 }
 
 #backwardButton{
 	width: 40%;
 	left: 0;
+
 }
 
+
 #preload{
-	display: none;
+	height: 0px;
 	background-image: url("img/pic01.jpg");
 }
 
