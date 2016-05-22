@@ -1,0 +1,121 @@
+#picviewContainer{
+	position:relative;
+	margin-bottom: 50px;
+}
+@media(max-width: 500px){
+	#picviewContainer{
+		margin-bottom: 20px;
+	}
+}
+
+#picview{
+	padding-bottom: 50%;
+	background-size: contain;
+	background-position: center center;
+	background-repeat: no-repeat;
+	position: relative;
+	display: none;
+	-webkit-transition: 0.1s ease-in-out;
+    -moz-transition: 0.1s ease-in-out;
+    -o-transition: 0.1s ease-in-out;
+    transition: 0.1s ease-in-out;
+}
+
+.picNavButton{
+	top: 0;
+	bottom: 0;
+	position: absolute;
+	z-index: 1;
+}
+
+#forwardButton{
+	width: 60%;
+	right: 0;
+}
+#forwardButton:hover~#picview{
+	transform: translate(-20px, 0px);
+}
+
+#backwardButton{
+	width: 40%;
+	left: 0;
+}
+
+#backwardButton:hover~#picview{
+	transform: translate(20px, 0px);
+}
+
+
+#preload{
+	height: 0px;
+	background-image: url("img/pic01.jpg");
+}
+
+.thumbnail{
+	width: 200px;
+	height: 200px;
+	margin: 15px;
+	-webkit-transition: 0.1s ease-in-out;
+    -moz-transition: 0.1s ease-in-out;
+    -o-transition: 0.1s ease-in-out;
+    transition: 0.1s ease-in-out;
+}
+@media(max-width: 700px){
+	.thumbnail{
+		width: 130px;
+		height: 130px;
+		margin: 10px;
+	}
+}
+.thumbnail:hover{
+    -ms-transform: scale(1.05); /* IE 9 */
+    -webkit-transform: scale(1.05); /* Safari */
+    transform: scale(1.05);
+}
+
+#videos{
+	margin: auto;
+}
+
+.video{
+	width: 400px;
+	height: 225px;
+	margin: 10px;
+	display: inline-block;
+	background-color: black;
+	background-size: cover;
+	
+}
+
+#video1{
+	background-image: url("img/vid1.jpg");
+}
+#video2{
+	background-image: url("img/vid2.jpg");
+}
+
+
+#pascalImg{
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+}
+
+.aboutText{
+	max-width: 550px;
+	margin: 0 auto;
+}
+
+p{
+	font-size: 18px;
+	padding: 20px;
+}
+@media(max-width: 450px){
+	p{
+		font-size: 16px;
+	}
+}
+
+#gearList{
+	font-size: 15px;
+}
