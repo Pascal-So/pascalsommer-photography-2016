@@ -3,9 +3,9 @@
 //start and end id, inclusive
 //start >= end, as blog is ordered in reverse chronological order
  
-include("sqlConfig.php");
-include("Post.php");
-include("commonFunctions.php");
+include("../php/sqlConfig.php");
+include("../php/Post.php");
+include("../php/commonFunctions.php");
 
 /*
 if(!isset($_POST["idStart"]) || !isset($_POST["idEnd"]){
