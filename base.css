@@ -19,6 +19,9 @@ html, body{
 div{
 	box-sizing: border-box;
 }
+textarea{
+	box-sizing: border-box;	
+}
 
 header{
 	margin: 0px;
@@ -100,6 +103,14 @@ h4{
 	margin-top: 10px;
 	font-size: 18px;
 	letter-spacing: 2px;	
+}
+h5{
+	font-family: "CodeLight";
+	font-weight: 700px;
+	margin-top: 0px;
+	margin-bottom: 5px;
+	font-size: 12px;
+	letter-spacing: 2px;
 }
 
 @media(max-width: 500px){
