@@ -3,21 +3,18 @@
 //start and end id, inclusive
 //start >= end, as blog is ordered in reverse chronological order
  
-include("../php/sqlConfig.php");
-include("../php/Post.php");
-include("../php/commonFunctions.php");
+include("sqlConfig.php");
+include("Post.php");
+include("commonFunctions.php");
 
-/*
-if(!isset($_POST["idStart"]) || !isset($_POST["idEnd"]){
+
+if(!isset($_POST["start_id"]) || !isset($_POST["end_id"]){
 	invalid_request();
 }
 
-$start = intval($_POST["idStart"]);
-$end = intval($_POST["idEnd"]);
-*/
+$start = intval($_POST["start_id"]);
+$end = intval($_POST["end_id"]);
 
-$start = 1;
-$end = 1;
 
 if($start == 0 || $end == 0){
 	invalid_request();

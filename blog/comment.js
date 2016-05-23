@@ -20,14 +20,13 @@ function send_comment(button_object){
 		return;
 	}
 
-
 	var par = button_object.parent();
 	var post_id = parseInt(par.siblings(".post_id").html());
-
-	console.log(post_id);
 	$.post( "PostComment.php", { name: namefield.val(), text: textfield.val(), pid: post_id })
-		.done(function( data ) {
-			
+		.done(function( data ) {			
 			par.siblings(".comments").html(data);
+		})
+		.fail(function() {
+			alert("Could not connect, please try again later.");
 		});
 }
