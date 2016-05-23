@@ -62,14 +62,14 @@ class Post {
 		$out.=     "<h5>{$this->date}</h5>";
 		$out.=     format_photos($this->photos);
 		$out.=     "<h5 class='comments_toggle'>{$toggle_comments_string}</h5>";
-		$out.=     "<div class='comments_block'>";
+		$out.=     "<div class='comments_block hidden'>";
 		$out.=         "<div class='comments'>";
 		$out.=             format_comments($this->comments);
 		$out.=         "</div>";
 		$out.=         "<form class='comment comment_new'>";
 		$out.=             "<h4 class='comment_name'>New comment</h4>";
-		$out.=             "<input type='text' class='comment_input text_input' placeholder='Name' name='name'><br>";
-		$out.=             "<textarea name='text' class='comment_input comment_input_text text_input' placeholder='Message'></textarea><br>";
+		$out.=             "<input type='text' class='comment_input comment_input_name text_input' placeholder='Name'><br>";
+		$out.=             "<textarea class='comment_input comment_input_text text_input' placeholder='Message'></textarea><br>";
 		$out.=             "<input type='button' value='SEND' class='comment_send comment_input'><br>";
 		$out.=         "</form>";
 		$out.=     "</div>";
