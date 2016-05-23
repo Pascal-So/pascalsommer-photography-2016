@@ -5,4 +5,16 @@ function invalid_request(){
 	exit();
 }
 
+function abort(){
+	exit();
+}
+
+function stripNewlines($string){
+	$string = str_replace("\n\r", "<br>", $string);
+	$string = str_replace("\r\n", "<br>", $string);
+	$string = str_replace("\n", "<br>", $string);
+	$string = str_replace("\r", "<br>", $string);
+	return $string;
+}
+
 ?>

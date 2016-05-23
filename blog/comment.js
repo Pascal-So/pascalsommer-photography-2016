@@ -20,8 +20,14 @@ function send_comment(button_object){
 		return;
 	}
 
-	$.post( "PostComment.php", { name: namefield.val(), text: textfield.val() })
+
+	var par = button_object.parent();
+	var post_id = parseInt(par.siblings(".post_id").html());
+
+	console.log(post_id);
+	$.post( "PostComment.php", { name: namefield.val(), text: textfield.val(), pid: post_id })
 		.done(function( data ) {
-			button_object.parent().siblings(".comments").html(data);
+			
+			par.siblings(".comments").html(data);
 		});
 }

@@ -63,6 +63,7 @@ class Post {
 		$out.=     format_photos($this->photos);
 		$out.=     "<h5 class='comments_toggle'>{$toggle_comments_string}</h5>";
 		$out.=     "<div class='comments_block hidden'>";
+		$out.=         "<div class='post_id hidden'>{$this->id}</div>";
 		$out.=         "<div class='comments'>";
 		$out.=             format_comments($this->comments);
 		$out.=         "</div>";
