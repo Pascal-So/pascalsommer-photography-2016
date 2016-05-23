@@ -5,8 +5,8 @@ function get_photos($sql, $id){
 	$photos = array();
 	while($row = $res->fetch_assoc()){
 		$photo = array(
-			"location" => $res["location"],
-			"description" => $res["description"]
+			"location" => $row["location"],
+			"description" => $row["description"]
 			);
 		$photos[] = $photo;
 	}
@@ -16,7 +16,7 @@ function get_photos($sql, $id){
 function format_photos($photos){
 	$out = "";
 	foreach($photos as $photo){
-		out .= "<img class='blog_img' src='{$photo['location']}' alt='{$photo['description']}'>";
+		$out .= "<img class='blog_img' src='{$photo['location']}' alt='{$photo['description']}'>";
 	}
 	return $out;
 }
@@ -26,9 +26,9 @@ function get_comments($sql, $id){
 	$comments = array();
 	while($row = $res->fetch_assoc()){
 		$comment = array(
-			"name" => $res["name"],
-			"date" => $res["date"],
-			"text" => $res["text"],
+			"name" => $row["name"],
+			"date" => $row["date"],
+			"text" => $row["text"],
 			);
 		$comments[] = $comment;
 	}
@@ -38,11 +38,11 @@ function get_comments($sql, $id){
 function format_comments($comments){
 	$out = "";
 	foreach($comments as $comment){
-		out .= "<div class='comment'>";
-		out .= "<h5 class='comment_date'>{$comment['date']}</h5>";
-		out .= "<h4 class='comment_name'>{$comment['name']}</h4>";
-		out .= "<p  class='comment_text'>{$comment['text']}</p>";
-		out .= "</div>";
+		$out .= "<div class='comment'>";
+		$out .= "<h5 class='comment_date'>{$comment['date']}</h5>";
+		$out .= "<h4 class='comment_name'>{$comment['name']}</h4>";
+		$out .= "<p  class='comment_text'>{$comment['text']}</p>";
+		$out .= "</div>";
 	}
 	return $out;
 }

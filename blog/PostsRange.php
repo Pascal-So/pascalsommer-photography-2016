@@ -4,15 +4,24 @@
 //start >= end, as blog is ordered in reverse chronological order
  
 include("sqlConfig.php");
+include("Post.php");
 include("commonFunctions.php");
 
-
+/*
 if(!isset($_POST["idStart"]) || !isset($_POST["idEnd"]){
 	invalid_request();
 }
 
-$start = $_POST["idStart"];
-$end = $_POST["idEnd"];
+$start = intval($_POST["idStart"]);
+$end = intval($_POST["idEnd"]);
+*/
+
+$start = 1;
+$end = 1;
+
+if($start == 0 || $end == 0){
+	invalid_request();
+}
 
 if($start < $end){
 	invalid_request();
@@ -20,20 +29,21 @@ if($start < $end){
 
 $sql = new mysqli($sql_host, $sql_username, $sql_password, "pascalsommer_ch");
 
-$res = $sql->query("select count(*) as count form posts");
+$posts = array();
 
-$count = $res->fetch_assoc()["count"];
+for($i = $start; $i >= $end; $i--){
+	$post = new Post($i);
+	if($post->load($sql)){
+		$posts[] = $post;	
+	}
+}
 
-if($start>$count || $end < 1){
+if(count($posts)==0){
 	invalid_request();
 }
 
-$raw_posts = array();
-
-for($i = $start; $i>=$end; $i--){
-	$raw_posts[] = 
+foreach($posts as $post){
+	echo $post->view();
 }
-
-$posts = array();
 
 ?>
