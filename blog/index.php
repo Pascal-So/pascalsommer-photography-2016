@@ -22,7 +22,7 @@ if(isset($_GET['count'])){
 }
 
 $start = $count;
-$end = $count-$block_size;
+$end = $count-$block_size+1;
 ?>
 
 <html>
@@ -65,6 +65,7 @@ $end = $count-$block_size;
 <section id="blog">
 	<div class="nr_posts hidden"><?= $count ?></div>
 	<div class="next_start hidden"><?= $end-1 ?></div>
+	<div class="block_size hidden"><?= $block_size ?></div>
 	<div class="temp hidden"></div>
 	<div class="posts">
 		<?= getRange($start, $end) ?>

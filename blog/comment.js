@@ -1,4 +1,6 @@
 function send_comment(button_object){
+	console.log("attempt sending");
+
 	var namefield = button_object.siblings(".comment_input_name");
 	var textfield = button_object.siblings(".comment_input_text");
 
@@ -33,5 +35,5 @@ function send_comment(button_object){
 
 function toggle_comments(toggle_object){
 	var block = toggle_object.siblings(".comments_block");
-	block.toggle();
+	block.toggleClass("hidden");
 }

@@ -12,7 +12,7 @@ html, body{
 	margin: 0;
 	padding: 0;
 	color: #ccc;
-	//overflow-y: hidden;
+	/*overflow-y: hidden;*/
 	/*overflow-x: hidden; ACTIVATE WHEN DONE */
 }
 
@@ -47,8 +47,11 @@ nav{
 	padding: 10px 0;
 	display: flex;
 	justify-content: center;
+	-webkit-justify-content: center;
 	flex-direction: row;
+	-webkit-flex-direction: row;
 	align-items: center;
+	-webkit-align-items: center;
 }
 nav a{
 	color: #ccc;

@@ -58,7 +58,7 @@ class Post {
 				$toggle_comments_string = "{$this->nr_comments} comments";
 		}
 
-		$out = "<div class='post'>";
+		$out = "<div class='post fresh'>";
 		$out.=     "<h3 class='post_title'>{$this->title}</h3>";
 		$out.=     "<h5>{$this->date}</h5>";
 		$out.=     format_photos($this->photos);

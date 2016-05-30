@@ -18,9 +18,10 @@ input[type="button"]:hover{
 	background-color: #300 !important;
 }
 .post{
-	padding-top: 10px;
+	padding-top: 5px;
 	color: #ccc;
 	border: 1px #333 solid;
+	margin-bottom: 20px;
 }
 .post_title{
 	margin-bottom: 0px;
