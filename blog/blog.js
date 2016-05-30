@@ -2,6 +2,9 @@ $(function(){
 	$(".comment_send").click(function(e){
 		send_comment($(e.target));
 	});
+	$(".comments_toggle").click(function(e){
+		toggle_comments($(e.target));
+	});
 
 	var nr_posts = parseInt($(".nr_posts").html());
 

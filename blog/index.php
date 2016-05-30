@@ -32,6 +32,9 @@ $end = $count-$block_size;
   	<meta name="viewport" content="width=device-width, initial-scale=1">
   	<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
 
+  	
+  	<link href='https://fonts.googleapis.com/css?family=Advent+Pro:400,700' rel='stylesheet' type='text/css'>
+
 	<title>
 		Pascal Sommer
 	</title>
@@ -48,8 +51,8 @@ $end = $count-$block_size;
 <body>
 <header>
 	<div id="titleBar">
-		<h1>Pascal Sommer</h1>
-		<h3>Photography</h3>
+		<h1>PASCAL SOMMER</h1>
+		<h3>PHOTOGRAPHY</h3>
 	</div>
 	<nav>
 		<a href="#work">WORK</a>

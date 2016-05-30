@@ -30,3 +30,8 @@ function send_comment(button_object){
 			alert("Could not connect, please try again later.");
 		});
 }
+
+function toggle_comments(toggle_object){
+	var block = toggle_object.siblings(".comments_block");
+	block.toggle();
+}
