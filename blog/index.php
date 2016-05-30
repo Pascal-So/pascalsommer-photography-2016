@@ -1,15 +1,28 @@
 <?php
-/*
+
 ini_set('display_startup_errors', 1);
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-*/
-include("sqlConfig.php");
+
+
+include_once("sqlConfig.php");
+include_once("Post.php");
+
 $sql = new mysqli($sql_host, $sql_username, $sql_password, "pascalsommer_ch");
 
-$res = $sql->query("select count(*) as count from posts");
+$res = $sql->query("select max(id) as count from posts");
 $count = intval($res->fetch_assoc()["count"]);
 
+$block_size = 10;
+if(isset($_GET['count'])){
+	$in= intval($_GET['count']);
+	if($in>0){
+		$block_size=$in;
+	}
+}
+
+$start = $count;
+$end = $count-$block_size;
 ?>
 
 <html>
@@ -47,14 +60,15 @@ $count = intval($res->fetch_assoc()["count"]);
 
 
 <section id="blog">
-	<div class="nr_posts hidden"><?php echo $count ?></div>
+	<div class="nr_posts hidden"><?= $count ?></div>
+	<div class="next_start hidden"><?= $end-1 ?></div>
 	<div class="temp hidden"></div>
 	<div class="posts">
-		
+		<?= getRange($start, $end) ?>
 	</div>
 	
-	<h4 class="">Loading pictures...</h4>
-	<input type="button" class="more_button hidden" value="SHOW OLDER CONTENT">
+	<h4 class="hidden">Loading pictures...</h4>
+	<input type="button" class="more_button <?php if($end-1 <= 0){echo 'hidden';} ?>" value="SHOW OLDER CONTENT">
 </section>
 
 
@@ -67,6 +81,7 @@ $count = intval($res->fetch_assoc()["count"]);
 
 </body>
 </html>
+
 
 <?php
 

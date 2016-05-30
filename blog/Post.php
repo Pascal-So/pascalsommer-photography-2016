@@ -4,7 +4,8 @@ ini_set('display_startup_errors', 1);
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 */
-include("PostFunctions.php");
+include_once("PostFunctions.php");
+include_once("sqlConfig.php");
 
 class Post {
 
@@ -78,6 +79,42 @@ class Post {
 
 		return $out;
 	}
+}
+
+
+
+function getRange($start, $end){
+	global $sql_host, $sql_username, $sql_password;
+
+	$out = "";
+
+	if($end <= 0){
+		$end = 1;
+	}
+
+	if($start < $end){
+		return $out;
+	}
+
+	$sql = new mysqli($sql_host, $sql_username, $sql_password, "pascalsommer_ch");
+
+	$posts = array();
+
+	for($i = $start; $i >= $end; $i--){
+		$post = new Post($i);
+		if($post->load($sql)){
+			$posts[] = $post;
+		}
+	}
+
+	if(count($posts)==0){
+		return $out;
+	}
+
+	foreach($posts as $post){
+		$out.= $post->view();
+	}
+	return $out;
 }
 
 ?>
