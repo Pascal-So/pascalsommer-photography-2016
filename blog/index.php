@@ -1,13 +1,19 @@
 <?php
-/*
+
 ini_set('display_startup_errors', 1);
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-*/
+
 include("sqlConfig.php");
 $sql = new mysqli($sql_host, $sql_username, $sql_password, "pascalsommer_ch");
 
+
+if($sql->connect_errno){
+	echo $mysqli->connect_error;
+}
+
 $res = $sql->query("select count(*) as count from posts");
+echo $sql->error;
 $count = intval($res->fetch_assoc()["count"]);
 
 ?>
