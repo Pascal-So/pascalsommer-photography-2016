@@ -5,8 +5,9 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 */
 
-include("../php/sqlConfig.php");
-include_once("../php/commonFunctions.php");
+include_once("sqlConfig.php");
+include_once("commonFunctions.php");
+include_once("PostFunctions.php");
 
 if(!isset($_POST["name"]) || !isset($_POST["text"]) || !isset($_POST["pid"])){
 	echo "asdf";
@@ -23,6 +24,9 @@ $pid  = $_POST["pid"];
 
 $prep->bind_param("ssi", $name, $text, $pid);
 
-echo $prep->execute();
+$prep->execute();
+
+echo format_comments(get_comments($sql, $pid));
+
 
 ?>

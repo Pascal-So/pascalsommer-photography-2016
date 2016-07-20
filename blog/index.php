@@ -4,18 +4,26 @@ ini_set('display_startup_errors', 1);
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-include("sqlConfig.php");
+
+include_once("sqlConfig.php");
+include_once("Post.php");
+
 $sql = new mysqli($sql_host, $sql_username, $sql_password, "pascalsommer_ch");
 
+$res = $sql->query("select max(id) as count from posts");
 
-if($sql->connect_errno){
-	echo $mysqli->connect_error;
-}
-
-$res = $sql->query("select count(*) as count from posts");
-echo $sql->error;
 $count = intval($res->fetch_assoc()["count"]);
 
+$block_size = 10;
+if(isset($_GET['count'])){
+	$in= intval($_GET['count']);
+	if($in>0){
+		$block_size=$in;
+	}
+}
+
+$start = $count;
+$end = $count-$block_size+1;
 ?>
 
 <html>
@@ -24,6 +32,9 @@ $count = intval($res->fetch_assoc()["count"]);
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
   	<meta name="viewport" content="width=device-width, initial-scale=1">
   	<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+
+  	
+  	<link href='https://fonts.googleapis.com/css?family=Advent+Pro:400,700' rel='stylesheet' type='text/css'>
 
 	<title>
 		Pascal Sommer
@@ -41,8 +52,8 @@ $count = intval($res->fetch_assoc()["count"]);
 <body>
 <header>
 	<div id="titleBar">
-		<h1>Pascal Sommer</h1>
-		<h3>Photography</h3>
+		<h1>PASCAL SOMMER</h1>
+		<h3>PHOTOGRAPHY</h3>
 	</div>
 	<nav>
 		<a href="#work">WORK</a>
@@ -53,14 +64,16 @@ $count = intval($res->fetch_assoc()["count"]);
 
 
 <section id="blog">
-	<div class="nr_posts hidden"><?php echo $count ?></div>
+	<div class="nr_posts hidden"><?= $count ?></div>
+	<div class="next_start hidden"><?= $end-1 ?></div>
+	<div class="block_size hidden"><?= $block_size ?></div>
 	<div class="temp hidden"></div>
 	<div class="posts">
-		
+		<?= getRange($start, $end) ?>
 	</div>
 	
-	<h4 class="">Loading pictures...</h4>
-	<input type="button" class="more_button hidden" value="SHOW OLDER CONTENT">
+	<h4 class="hidden">Loading pictures...</h4>
+	<input type="button" class="more_button <?php if($end-1 <= 0){echo 'hidden';} ?>" value="SHOW OLDER CONTENT">
 </section>
 
 
@@ -73,6 +86,7 @@ $count = intval($res->fetch_assoc()["count"]);
 
 </body>
 </html>
+
 
 <?php
 

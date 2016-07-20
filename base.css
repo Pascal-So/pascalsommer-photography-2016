@@ -12,7 +12,7 @@ html, body{
 	margin: 0;
 	padding: 0;
 	color: #ccc;
-	//overflow-y: hidden;
+	/*overflow-y: hidden;*/
 	/*overflow-x: hidden; ACTIVATE WHEN DONE */
 }
 
@@ -47,8 +47,11 @@ nav{
 	padding: 10px 0;
 	display: flex;
 	justify-content: center;
+	-webkit-justify-content: center;
 	flex-direction: row;
+	-webkit-flex-direction: row;
 	align-items: center;
+	-webkit-align-items: center;
 }
 nav a{
 	color: #ccc;
@@ -75,41 +78,41 @@ section{
 }
 
 h1{
-	font-family: "CodeBold";
-	font-weight: 100;
+	font-family: 'Advent Pro', sans-serif;
+	font-weight: 700;
 	font-size: 50px;
 	letter-spacing: 2px;
 	margin-bottom: 10px;
 }
 
 h2{
-	font-family: "CodeLight";
-	font-size: 40px;
+	font-family: 'Advent Pro', sans-serif;
+	font-size: 400;
 	letter-spacing: 3px;
 	font-weight: 700;
 }
 
 h3{
-	font-family: "CodeLight";
-	font-weight: 700px;
+	font-family: 'Advent Pro', sans-serif;
+	font-weight: 400;
 	margin-top: 10px;
 	font-size: 25px;
 	letter-spacing: 2px;
+	text-transform: uppercase;
 }
 
-h4{
-	font-family: "CodeLight";
-	font-weight: 700px;
+h4{	
+	font-weight: 400;
 	margin-top: 10px;
 	font-size: 18px;
 	letter-spacing: 2px;	
 }
 h5{
-	font-family: "CodeLight";
-	font-weight: 700px;
+	font-family: 'Advent Pro', sans-serif;
+	font-weight: 400;
 	margin-top: 0px;
 	margin-bottom: 5px;
-	font-size: 12px;
+	font-size: 13px;
 	letter-spacing: 2px;
 }
 
