@@ -84,7 +84,7 @@ class Post {
 
 
 function getRange($start, $end){
-	global $sql_host, $sql_username, $sql_password;
+	global $sql_host, $sql_username, $sql_password, $sql_database;
 
 	$out = "";
 
@@ -96,7 +96,7 @@ function getRange($start, $end){
 		return $out;
 	}
 
-	$sql = new mysqli($sql_host, $sql_username, $sql_password, "pascalsommer_ch");
+	$sql = new mysqli($sql_host, $sql_username, $sql_password, $sql_database);
 
 	$posts = array();
 

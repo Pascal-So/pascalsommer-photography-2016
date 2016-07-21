@@ -8,7 +8,7 @@ error_reporting(E_ALL);
 include_once("sqlConfig.php");
 include_once("Post.php");
 
-$sql = new mysqli($sql_host, $sql_username, $sql_password, "pascalsommer_ch");
+$sql = new mysqli($sql_host, $sql_username, $sql_password, $sql_database);
 
 $res = $sql->query("select max(id) as count from posts");
 
@@ -56,8 +56,8 @@ $end = $count-$block_size+1;
 		<h3>PHOTOGRAPHY</h3>
 	</div>
 	<nav>
-		<a href="#work">WORK</a>
-		<a href="#about">ABOUT ME</a>
+		<a href="../#work">WORK</a>
+		<a href="../#about">ABOUT ME</a>
 		<a href="#blog">BLOG</a>
 	</nav>
 </header>

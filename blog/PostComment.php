@@ -14,7 +14,7 @@ if(!isset($_POST["name"]) || !isset($_POST["text"]) || !isset($_POST["pid"])){
 	abort();
 }
 
-$sql = new mysqli($sql_host, $sql_username, $sql_password, "pascalsommer_ch");
+$sql = new mysqli($sql_host, $sql_username, $sql_password, $sql_database);
 
 $prep = $sql->prepare("insert into comments (name, text, post_id) values (?, ?, ?)");
 
