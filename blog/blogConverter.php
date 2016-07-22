@@ -11,10 +11,6 @@ $base_path = "";
 
 $sql = new mysqli($sql_host, $sql_username, $sql_password, "pascalsommer_ch_blog");
 
-$olddb = new mysqli("", "", "", "pascalsommer_ch");
-if ($olddb->connect_errno) {
-    echo "Failed to connect to MySQL: (" . $olddb->connect_errno . ") " . $olddb->connect_error;
-}
 
 
 $sql->query("delete from photos");
@@ -55,18 +51,7 @@ foreach($entries as $e){
 			}
 		}
 
-		// ########### comments
-
-		$res = $olddb->query("select name, content, time from comments where post = \"{$e}\"");
-
 		
-		
-		while ($row = $res->fetch_assoc()){
-			var_dump($row);
-			$query = "insert into comments (name, text, date, post_id) values (\"{$row["name"]}\", \"{$row["content"]}\", \"{$row["time"]}\", {$id})";
-			echo $query."<br>";
-			$sql->query($query);
-		}
 
 		$id++;
 	}
