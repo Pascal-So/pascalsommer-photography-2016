@@ -1,7 +1,7 @@
 <?php
 
-function get_photos($sql, $id){
-	$res = $sql->query("select location, description from photos where post_id=" . $id . " order by id");
+function get_photos($sql, int $id) : array {
+	$res = $sql->query("SELECT location, description FROM photos WHERE post_id=" . $id . " ORDER BY id");
 	$photos = array();
 	while($row = $res->fetch_assoc()){
 		$photo = array(
@@ -13,7 +13,7 @@ function get_photos($sql, $id){
 	return $photos;
 }
 
-function format_photos($photos){
+function format_photos(array $photos) : string {
 	$out = "";
 	foreach($photos as $photo){
 		$out .= "<img class='blog_img' src='{$photo['location']}' alt='{$photo['description']}'>";
@@ -21,8 +21,8 @@ function format_photos($photos){
 	return $out;
 }
 
-function get_comments($sql, $id){
-	$res = $sql->query("select name, date_format(date,'%D %M %Y') as date, text from comments where post_id=" . $id . " order by date");
+function get_comments($sql, int $id) : array {
+	$res = $sql->query("SELECT name, date_format(date,'%D %M %Y') AS date, text FROM comments WHERE post_id=" . $id . " ORDER BY date");
 	$comments = array();
 	while($row = $res->fetch_assoc()){
 		$comment = array(
@@ -35,11 +35,11 @@ function get_comments($sql, $id){
 	return $comments;
 }
 
-function sanitize($text){
+function sanitize(string $text) : string {
 	return nl2br(htmlspecialchars($text));
 }
 
-function format_comments($comments){
+function format_comments(array $comments) : string {
 	$out = "";
 	foreach($comments as $comment){
 		$out .= "<div class='comment'>";

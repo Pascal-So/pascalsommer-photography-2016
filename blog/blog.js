@@ -1,26 +1,23 @@
 $(function(){
 	addPostHandlers();
 	var nr_posts = parseInt($(".nr_posts").html());
-	var offset = parseInt($(".block_size").html());
-	var current_start = parseInt($(".next_start").html());
-	var current_end = current_start-offset+1;
+	var posts_per_request = parseInt($(".posts_per_request").html());
+	var skip_nr_posts = posts_per_request;
 
 	var blog_content = $(".posts");
-	//var temp_content = $(".temp");
 
-	
 	$(".more_button").click(function(){
-		load(current_start, current_end, blog_content);
-		current_start = current_end-1;
-		current_end = current_start-offset+1;
-		if(current_start<=0){
+		load(skip_nr_posts, posts_per_request, blog_content);
+		skip_nr_posts += posts_per_request;
+
+		if(skip_nr_posts >= nr_posts){
 			$(".more_button").addClass("hidden");
 		}
 	});
 });
 
-function load(current_start, current_end, object){
-	$.post("PostsRange.php", {start_id: current_start, end_id: current_end})
+function load(skip_nr, amount, object){
+	$.post("PostsRange.php", {skip_nr: skip_nr, amount: amount})
 		.done(function(data){
 			object.append(data);
 			addPostHandlers();

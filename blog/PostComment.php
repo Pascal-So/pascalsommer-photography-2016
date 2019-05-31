@@ -15,8 +15,12 @@ if(!isset($_POST["name"]) || !isset($_POST["text"]) || !isset($_POST["pid"])){
 
 $sql = new mysqli($sql_host, $sql_username, $sql_password, $sql_database);
 
-$prep = $sql->prepare("insert into comments (name, text, post_id) values (?, ?, ?)");
-$prep->bind_param("ssi", $_POST["name"], $_POST["text"], $_POST["pid"]);
+$name = $_POST["name"];
+$text = $_POST["text"];
+$pid = $_POST["pid"];
+
+$prep = $sql->prepare("INSERT INTO comments (name, text, post_id) VALUES (?, ?, ?)");
+$prep->bind_param("ssi", $name, $text, $pid);
 
 $prep->execute();
 

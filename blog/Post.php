@@ -15,39 +15,25 @@ class Post {
 	private $date;
 
 	private $photos;
-
 	private $comments;
 
-	private $nr_comments;
-
-	public function __construct($id){
+	public function __construct(int $id, string $title, string $date){
 		$this->id = $id;
+		$this->title = $title;
+		$this->date = $date;
 		$this->photos = array();
 		$this->comments = array();
 	}
 
-	public function load($sql){
-		$res = $sql->query("select title, date_format(date,'%D %M %Y') as date from posts where id=" . $this->id);
-		if($res->num_rows == 0){
-			return false;
-		}
-
-		$row = $res->fetch_assoc();
-		$this->title = $row["title"];
-		$this->date = $row["date"];
-
-		$this->photos = get_photos($sql, $this->id);
-
+	public function load_photos_and_comments($sql){
 		$this->comments = get_comments($sql, $this->id);
-
-		$this->nr_comments = count($this->comments);
-
-		return true;
+		$this->photos = get_photos($sql, $this->id);
 	}
 
-	public function view(){
+	public function view() : string {
+		$nr_comments = count($this->comments);
 		$toggle_comments_string;
-		switch($this->nr_comments){
+		switch($nr_comments){
 			case 0:
 				$toggle_comments_string = "no comments yet";
 				break;
@@ -55,7 +41,7 @@ class Post {
 				$toggle_comments_string = "1 comment";
 				break;
 			default:
-				$toggle_comments_string = "{$this->nr_comments} comments";
+				$toggle_comments_string = "{$nr_comments} comments";
 		}
 
 		$out = "<div class='post fresh'>";
@@ -82,38 +68,26 @@ class Post {
 }
 
 
-
-function getRange($start, $end){
+function getRange(int $skip_nr, int $amount) : string {
 	global $sql_host, $sql_username, $sql_password, $sql_database;
-
-	$out = "";
-
-	if($end <= 0){
-		$end = 1;
-	}
-
-	if($start < $end){
-		return $out;
-	}
 
 	$sql = new mysqli($sql_host, $sql_username, $sql_password, $sql_database);
 	$sql->set_charset('utf8');
-	$posts = array();
 
-	for($i = $start; $i >= $end; $i--){
-		$post = new Post($i);
-		if($post->load($sql)){
-			$posts[] = $post;
-		}
+	$query = $sql->prepare("SELECT id, title, date_format(date,'%D %M %Y') AS date FROM posts ORDER BY id DESC LIMIT ?, ?");
+	$query->bind_param("ii", $skip_nr, $amount);
+	$query->execute();
+	$query_result = $query->get_result();
+
+	$out = "";
+
+	while($post_data = $query_result->fetch_assoc()){
+		$post = new Post($post_data['id'], $post_data['title'], $post_data['date']);
+		$post->load_photos_and_comments($sql);
+		$out .= $post->view();
+		$out .= "\n";
 	}
 
-	if(count($posts)==0){
-		return $out;
-	}
-
-	foreach($posts as $post){
-		$out.= $post->view();
-	}
 	return $out;
 }
 
