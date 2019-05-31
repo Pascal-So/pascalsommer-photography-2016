@@ -5,9 +5,9 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 */
 
-include_once("sqlConfig.php");
+include_once("config.php");
 
-$sql_connection = new mysqli($sql_host, $sql_username, $sql_password, $sql_database);
+$sql_connection = new mysqli($config['sql_host'], $config['sql_username'], $config['sql_password'], $config['sql_database']);
 
 function get_nr_posts($sql) : int {
 	$res = $sql->query("SELECT count(*) AS nr_posts FROM posts");
@@ -15,15 +15,21 @@ function get_nr_posts($sql) : int {
 }
 
 function get_photos($sql, int $post_id) : array {
-	$query = $sql->prepare("SELECT location, description FROM photos WHERE post_id=? ORDER BY id");
+	global $config;
+
+	$blog_2016_query = "SELECT location, description FROM photos WHERE post_id=? ORDER BY id";
+	$blog_2018_query = "SELECT path as location, description FROM photos WHERE post_id=? ORDER BY weight ASC";
+
+	$query = $sql->prepare($config['database_format_version'] == '2018' ? $blog_2018_query : $blog_2016_query);
 	$query->bind_param("i", $post_id);
 	$query->execute();
 	$res = $query->get_result();
 
 	$photos = [];
+	$base_path = $config['database_format_version'] == '2018' ? $config['2018_photos_base_path'] : '';
 	while($row = $res->fetch_assoc()){
 		$photo = array(
-			"location" => $row["location"],
+			"location" => $base_path . $row["location"],
 			"description" => $row["description"]
 			);
 		$photos[] = $photo;
@@ -32,7 +38,20 @@ function get_photos($sql, int $post_id) : array {
 }
 
 function get_comments($sql, int $post_id) : array {
-	$query = $sql->prepare("SELECT name, date_format(date,'%D %M %Y') AS date, text FROM comments WHERE post_id=? ORDER BY date");
+	global $config;
+
+	$blog_2016_query = "SELECT name, date_format(date,'%D %M %Y') AS date, text FROM comments WHERE post_id=? ORDER BY date";
+	$blog_2018_query = "
+		SELECT c.name as name, date_format(c.created_at,'%D %M %Y') AS date, c.comment as text
+		FROM comments c
+		INNER JOIN photos p on c.photo_id = p.id
+		WHERE p.post_id=? ORDER BY c.created_at
+	";
+
+	$query = $sql->prepare($config['database_format_version'] == '2018' ? $blog_2018_query : $blog_2016_query);
+	if(!$query){
+		die($sql->error);
+	}
 	$query->bind_param("i", $post_id);
 	$query->execute();
 	$res = $query->get_result();
@@ -50,7 +69,12 @@ function get_comments($sql, int $post_id) : array {
 }
 
 function get_posts_range($sql, int $skip_nr, int $amount) : array {
-	$query = $sql->prepare("SELECT id, title, date_format(date,'%D %M %Y') AS date FROM posts ORDER BY id DESC LIMIT ?, ?");
+	global $config;
+
+	$blog_2016_query = "SELECT id, title, date_format(date,'%D %M %Y') AS date FROM posts ORDER BY id DESC LIMIT ?, ?";
+	$blog_2018_query = "SELECT id, title, date_format(date,'%D %M %Y') AS date FROM posts ORDER BY posts.date DESC LIMIT ?, ?";
+
+	$query = $sql->prepare($config['database_format_version'] == '2018' ? $blog_2018_query : $blog_2016_query);
 	$query->bind_param("ii", $skip_nr, $amount);
 	$query->execute();
 	$query_result = $query->get_result();

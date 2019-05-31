@@ -1,0 +1,13 @@
+<?php
+
+$config = [
+    'sql_host' => "localhost",
+    'sql_username' => "",
+    'sql_password' => "",
+    'sql_database' => "",
+
+    'database_format_version' => "2016",
+    '2018_photos_base_path' => "",
+];
+
+?>

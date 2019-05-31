@@ -9,6 +9,12 @@ include_once("getters.php");
 include_once("formatters.php");
 include_once("commonFunctions.php");
 
+include_once("config.php");
+
+if($config['database_format_version'] != '2016'){
+    invalid_request();
+}
+
 if(!isset($_POST["name"]) || !isset($_POST["text"]) || !isset($_POST["pid"])){
     invalid_request();
 }

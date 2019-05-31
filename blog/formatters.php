@@ -1,5 +1,7 @@
 <?php
 
+include_once("config.php");
+
 function sanitize(string $text) : string {
 	return nl2br(htmlspecialchars($text));
 }
@@ -25,6 +27,8 @@ function format_photos(array $photos) : string {
 }
 
 function format_post(int $id, string $title, string $date, array $photos, array $comments) : string {
+	global $config;
+
 	$nr_comments = count($comments);
 	$toggle_comments_string;
 	switch($nr_comments){
@@ -48,12 +52,18 @@ function format_post(int $id, string $title, string $date, array $photos, array 
 	$out.=         "<div class='comments'>";
 	$out.=             format_comments($comments);
 	$out.=         "</div>";
-	$out.=         "<form class='comment comment_new'>";
-	$out.=             "<h4 class='comment_name'>New comment</h4>";
-	$out.=             "<input type='text' class='comment_input comment_input_name text_input' placeholder='Name'><br>";
-	$out.=             "<textarea class='comment_input comment_input_text text_input' placeholder='Message'></textarea><br>";
-	$out.=             "<input type='button' value='SEND' class='comment_send comment_input'><br>";
-	$out.=         "</form>";
+
+	// We don't allow the user to send comments when connected to the
+	// database of a newer version of the blog.
+	if($config['database_format_version'] == '2016'){
+		$out.=         "<form class='comment comment_new'>";
+		$out.=             "<h4 class='comment_name'>New comment</h4>";
+		$out.=             "<input type='text' class='comment_input comment_input_name text_input' placeholder='Name'><br>";
+		$out.=             "<textarea class='comment_input comment_input_text text_input' placeholder='Message'></textarea><br>";
+		$out.=             "<input type='button' value='SEND' class='comment_send comment_input'><br>";
+		$out.=         "</form>";
+	}
+
 	$out.=     "</div>";
 	$out.= "</div>";
 
