@@ -15,9 +15,9 @@ class Post {
 	private $date;
 
 	private $photos;
-	
+
 	private $comments;
-	
+
 	private $nr_comments;
 
 	public function __construct($id){
@@ -30,7 +30,7 @@ class Post {
 		$res = $sql->query("select title, date_format(date,'%D %M %Y') as date from posts where id=" . $this->id);
 		if($res->num_rows == 0){
 			return false;
-		} 
+		}
 
 		$row = $res->fetch_assoc();
 		$this->title = $row["title"];
@@ -97,7 +97,7 @@ function getRange($start, $end){
 	}
 
 	$sql = new mysqli($sql_host, $sql_username, $sql_password, $sql_database);
-
+	$sql->set_charset('utf8');
 	$posts = array();
 
 	for($i = $start; $i >= $end; $i--){

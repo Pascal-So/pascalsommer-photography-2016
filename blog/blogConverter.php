@@ -1,5 +1,14 @@
 <?php
 
+// Initially, posts were marked by directories in the `entries` dir,
+// named in the format "YYYY.MM.DD_Post-Title". All the photos in
+// the post directory are then part of the post.
+
+// This script scans all the posts and makes database entries instead,
+// which seems like a more robust solution. The photos are not moved
+// to a different directory, just the listing works different now.
+
+die("Blog converter has been disabled in order to avoid problems from repeated execution.");
 
 ini_set('display_startup_errors', 1);
 ini_set('display_errors', 1);
@@ -51,7 +60,7 @@ foreach($entries as $e){
 			}
 		}
 
-		
+
 
 		$id++;
 	}

@@ -1,5 +1,5 @@
 <?php
-	
+
 function get_photos($sql, $id){
 	$res = $sql->query("select location, description from photos where post_id=" . $id . " order by id");
 	$photos = array();
@@ -35,13 +35,17 @@ function get_comments($sql, $id){
 	return $comments;
 }
 
+function sanitize($text){
+	return nl2br(htmlspecialchars($text));
+}
+
 function format_comments($comments){
 	$out = "";
 	foreach($comments as $comment){
 		$out .= "<div class='comment'>";
-		$out .= "<h5 class='comment_date'>{$comment['date']}</h5>";
-		$out .= "<h4 class='comment_name'>{$comment['name']}</h4>";
-		$out .= "<p  class='comment_text'>{$comment['text']}</p>";
+		$out .= "<h5 class='comment_date'>" . sanitize($comment['date']) . "</h5>";
+		$out .= "<h4 class='comment_name'>" . sanitize($comment['name']) . "</h4>";
+		$out .= "<p  class='comment_text'>" . sanitize($comment['text']) . "</p>";
 		$out .= "</div>";
 	}
 	return $out;

@@ -10,19 +10,13 @@ include_once("commonFunctions.php");
 include_once("PostFunctions.php");
 
 if(!isset($_POST["name"]) || !isset($_POST["text"]) || !isset($_POST["pid"])){
-	echo "asdf";
-	abort();
+    invalid_request();
 }
 
 $sql = new mysqli($sql_host, $sql_username, $sql_password, $sql_database);
 
 $prep = $sql->prepare("insert into comments (name, text, post_id) values (?, ?, ?)");
-
-$name = $_POST["name"];
-$text = stripNewlines($_POST["text"]);
-$pid  = $_POST["pid"];
-
-$prep->bind_param("ssi", $name, $text, $pid);
+$prep->bind_param("ssi", $_POST["name"], $_POST["text"], $_POST["pid"]);
 
 $prep->execute();
 

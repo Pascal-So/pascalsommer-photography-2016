@@ -1,3 +1,5 @@
-# pascalsommer-redesign
+# Pascal Sommer Photography, 2016 Version
 
-Completely rebuilding pascalsommer.ch for the sake of practicing html/css and because the html/css on the other one is a mess.
+This was the first version of my photography blog that can be considered more than just an experiment. It was live from July 2016 until January 2017.
+
+Copy `sqlConfig.php.example` to `sqlConfig.php` and fill in the relevant credentials.
