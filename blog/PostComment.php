@@ -5,26 +5,23 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 */
 
-include_once("sqlConfig.php");
+include_once("getters.php");
+include_once("formatters.php");
 include_once("commonFunctions.php");
-include_once("PostFunctions.php");
 
 if(!isset($_POST["name"]) || !isset($_POST["text"]) || !isset($_POST["pid"])){
     invalid_request();
 }
 
-$sql = new mysqli($sql_host, $sql_username, $sql_password, $sql_database);
-
 $name = $_POST["name"];
 $text = $_POST["text"];
-$pid = $_POST["pid"];
+$post_id = $_POST["pid"];
 
-$prep = $sql->prepare("INSERT INTO comments (name, text, post_id) VALUES (?, ?, ?)");
-$prep->bind_param("ssi", $name, $text, $pid);
+$query = $sql_connection->prepare("INSERT INTO comments (name, text, post_id) VALUES (?, ?, ?)");
+$query->bind_param("ssi", $name, $text, $post_id);
+$query->execute();
 
-$prep->execute();
-
-echo format_comments(get_comments($sql, $pid));
+echo format_comments(get_comments($sql_connection, $post_id));
 
 
 ?>

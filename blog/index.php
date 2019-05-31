@@ -4,13 +4,10 @@ ini_set('display_startup_errors', 1);
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
+include_once("getters.php");
+include_once("formatters.php");
 
-include_once("sqlConfig.php");
-include_once("Post.php");
-
-$sql = new mysqli($sql_host, $sql_username, $sql_password, $sql_database);
-$res = $sql->query("SELECT count(*) AS nr_posts FROM posts");
-$nr_posts = intval($res->fetch_assoc()["nr_posts"]);
+$nr_posts = get_nr_posts($sql_connection);
 
 $posts_per_request = 10;
 if(isset($_GET['count'])){
@@ -64,7 +61,7 @@ if(isset($_GET['count'])){
 	<div class="posts_per_request hidden"><?= $posts_per_request ?></div>
 	<div class="temp hidden"></div>
 	<div class="posts">
-		<?= getRange(0, $posts_per_request) ?>
+		<?= format_posts_range(get_posts_range($sql_connection, 0, $posts_per_request)) ?>
 	</div>
 
 	<h4 class="hidden">Loading pictures...</h4>

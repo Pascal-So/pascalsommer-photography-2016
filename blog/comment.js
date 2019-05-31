@@ -15,7 +15,7 @@ function send_comment(button_object){
 	}
 	if(textfield.val() == ""){
 		error = true;
-		textfield.addClass("error");	
+		textfield.addClass("error");
 	}
 
 	if(error){
@@ -25,8 +25,10 @@ function send_comment(button_object){
 	var par = button_object.parent();
 	var post_id = parseInt(par.siblings(".post_id").html());
 	$.post( "PostComment.php", { name: namefield.val(), text: textfield.val(), pid: post_id })
-		.done(function( data ) {			
+		.done(function( data ) {
 			par.siblings(".comments").html(data);
+			namefield.val("");
+			textfield.val("");
 		})
 		.fail(function() {
 			alert("Could not connect, please try again later.");
