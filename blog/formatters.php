@@ -29,6 +29,8 @@ function format_photos(array $photos) : string {
 function format_post(int $id, string $title, string $date, array $photos, array $comments) : string {
 	global $config;
 
+	$commenting_enabled = $config['database_format_version'] == '2016';
+
 	$nr_comments = count($comments);
 	$toggle_comments_string;
 	switch($nr_comments){
@@ -46,7 +48,11 @@ function format_post(int $id, string $title, string $date, array $photos, array 
 	$out.=     "<h3 class='post_title'>{$title}</h3>";
 	$out.=     "<h5>{$date}</h5>";
 	$out.=     format_photos($photos);
-	$out.=     "<h5 class='comments_toggle'>{$toggle_comments_string}</h5>";
+
+	if ($commenting_enabled || $nr_comments > 0) {
+		$out.= "<h5 class='comments_toggle'>{$toggle_comments_string}</h5>";
+	}
+
 	$out.=     "<div class='comments_block hidden'>";
 	$out.=         "<div class='post_id hidden'>{$id}</div>";
 	$out.=         "<div class='comments'>";
@@ -55,13 +61,13 @@ function format_post(int $id, string $title, string $date, array $photos, array 
 
 	// We don't allow the user to send comments when connected to the
 	// database of a newer version of the blog.
-	if($config['database_format_version'] == '2016'){
-		$out.=         "<form class='comment comment_new'>";
-		$out.=             "<h4 class='comment_name'>New comment</h4>";
-		$out.=             "<input type='text' class='comment_input comment_input_name text_input' placeholder='Name'><br>";
-		$out.=             "<textarea class='comment_input comment_input_text text_input' placeholder='Message'></textarea><br>";
-		$out.=             "<input type='button' value='SEND' class='comment_send comment_input'><br>";
-		$out.=         "</form>";
+	if($commenting_enabled){
+		$out.=     "<form class='comment comment_new'>";
+		$out.=         "<h4 class='comment_name'>New comment</h4>";
+		$out.=         "<input type='text' class='comment_input comment_input_name text_input' placeholder='Name'><br>";
+		$out.=         "<textarea class='comment_input comment_input_text text_input' placeholder='Message'></textarea><br>";
+		$out.=         "<input type='button' value='SEND' class='comment_send comment_input'><br>";
+		$out.=     "</form>";
 	}
 
 	$out.=     "</div>";
