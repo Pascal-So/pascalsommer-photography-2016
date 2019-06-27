@@ -72,7 +72,7 @@ function get_posts_range($sql, int $skip_nr, int $amount) : array {
 	global $config;
 
 	$blog_2016_query = "SELECT id, title, date_format(date,'%D %M %Y') AS date FROM posts ORDER BY id DESC LIMIT ?, ?";
-	$blog_2018_query = "SELECT id, title, date_format(date,'%D %M %Y') AS date FROM posts ORDER BY posts.date DESC LIMIT ?, ?";
+	$blog_2018_query = "SELECT id, title, date_format(date,'%D %M %Y') AS date FROM posts ORDER BY posts.date DESC, posts.id DESC LIMIT ?, ?";
 
 	$query = $sql->prepare($config['database_format_version'] == '2018' ? $blog_2018_query : $blog_2016_query);
 	$query->bind_param("ii", $skip_nr, $amount);
